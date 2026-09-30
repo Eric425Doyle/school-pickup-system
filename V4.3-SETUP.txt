@@ -1,0 +1,15 @@
+V4.3 setup order
+
+1. BEFORE deploying V4.3, create userProfiles/<YOUR_FIREBASE_AUTH_UID> in Firestore with field:
+   role = "admin"
+   Optional fields: email, displayName
+
+2. Verify that profile exists while current V4.2 security rules are still active.
+
+3. Replace Firestore Rules with firestore-rules-v4.3.txt and Publish.
+
+4. Upload the V4.3 files to the GitHub repository root and commit to main.
+
+5. Sign in with the Admin test account and test Home, Scanner, Display, Admin, Students & QR, and History.
+
+Roles supported: admin, staff, scanner, display.
