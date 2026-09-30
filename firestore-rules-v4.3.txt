@@ -26,7 +26,7 @@ service cloud.firestore {
       allow create, update, delete: if hasRole(['admin','staff']);
     }
 
-    match /auditLogs/{id} {
+    match /auditLog/{id} {
       allow read: if hasRole(['admin']);
       allow create: if hasRole(['admin','staff','scanner']);
       allow update, delete: if false;

@@ -1,0 +1,6 @@
+V4.3.1 patch
+
+Fixes Audit History permissions mismatch.
+The published Firestore rules use the collection name "auditLog" (singular), while V4.3 application code queried "auditLogs" (plural).
+V4.3.1 consistently uses "auditLog" so the application matches the already-published security rules.
+No Firebase rule change is required for this patch if the current published rules contain: match /auditLog/{auditId}

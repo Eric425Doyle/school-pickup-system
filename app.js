@@ -105,7 +105,7 @@ async function addPickupByNumber(tagNumber,source="Manual"){
 async function submitScannerForm(inputId,messageId){const input=document.getElementById(inputId),m=document.getElementById(messageId);if(!input||!m)return;const r=await addPickupByNumber(input.value,"Manual");m.textContent=r.message;if(r.success){input.value="";input.focus();}}
 async function submitAdminAdd(inputId,messageId){const input=document.getElementById(inputId),m=document.getElementById(messageId);if(!input||!m)return;const r=await addPickupByNumber(input.value,"Admin");m.textContent=r.message;if(r.success){input.value="";input.focus();}}
 
-function auditRef(){ return db.collection('auditLogs'); }
+function auditRef(){ return db.collection('auditLog'); }
 async function writeAudit(action, details={}){
   try{
     const user = (typeof currentUser !== 'undefined' && currentUser) ? currentUser : await authReady;
