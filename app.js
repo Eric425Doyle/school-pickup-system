@@ -68,3 +68,38 @@ function renderServedList(id){const c=document.getElementById(id);if(!c)return;c
 function renderAllLists(){renderQueueList("queueList",false);renderQueueList("displayQueue",false);renderQueueList("adminQueue",true);renderServedList("servedQueue");}
 async function submitScannerForm(inputId,messageId){const input=document.getElementById(inputId),m=document.getElementById(messageId);if(!input||!m)return;const r=await addScan(input.value,"Manual");m.textContent=r.message;if(r.success){input.value="";input.focus();}}
 async function submitAdminAdd(inputId,messageId){const input=document.getElementById(inputId),m=document.getElementById(messageId);if(!input||!m)return;const r=await addScan(input.value,"Admin");m.textContent=r.message;if(r.success){input.value="";input.focus();}}
+
+function studentsRef(){ return db.collection("students"); }
+async function lookupStudentByQr(qrId){
+  const snap=await studentsRef().where("qrId","==",String(qrId).trim()).where("active","==",true).limit(1).get();
+  if(snap.empty)return null;
+  const d=snap.docs[0]; return {id:d.id,...d.data()};
+}
+async function lookupStudentByPickupNumber(tagNumber){
+  const snap=await studentsRef().where("pickupNumber","==",String(tagNumber).trim()).where("active","==",true).limit(1).get();
+  if(snap.empty)return null;
+  const d=snap.docs[0]; return {id:d.id,...d.data()};
+}
+async function saveStudentRecord({id,name,pickupNumber,qrId,active=true}){
+  name=String(name||"").trim(); pickupNumber=String(pickupNumber||"").trim(); qrId=String(qrId||"").trim();
+  if(!name||!pickupNumber||!qrId)return {success:false,message:"Student name, pickup number, and QR ID are required."};
+  const dupNum=await studentsRef().where("pickupNumber","==",pickupNumber).limit(2).get();
+  if(dupNum.docs.some(d=>d.id!==id))return {success:false,message:`Pickup #${pickupNumber} is already assigned.`};
+  const dupQr=await studentsRef().where("qrId","==",qrId).limit(2).get();
+  if(dupQr.docs.some(d=>d.id!==id))return {success:false,message:"That QR ID is already assigned."};
+  const ref=id?studentsRef().doc(id):studentsRef().doc();
+  await ref.set({name,pickupNumber,qrId,active:Boolean(active),updatedAtIso:new Date().toISOString()},{merge:true});
+  return {success:true,id:ref.id,message:`Saved ${name} / #${pickupNumber}.`};
+}
+async function setStudentActive(id,active){await studentsRef().doc(id).update({active:Boolean(active),updatedAtIso:new Date().toISOString()});}
+async function deleteStudentRecord(id){await studentsRef().doc(id).delete();}
+async function ensureDemoStudent(){
+  const q=await studentsRef().where("qrId","==","SPU-DEMO-7F29A8C4").limit(1).get();
+  if(q.empty) await saveStudentRecord({name:"Test Student",pickupNumber:"42",qrId:"SPU-DEMO-7F29A8C4",active:true});
+}
+async function addPickupByNumber(tagNumber,source="Manual"){
+  const cleaned=String(tagNumber||"").trim(); if(!cleaned)return {success:false,message:"Pickup number is required."};
+  try{const student=await lookupStudentByPickupNumber(cleaned);return student?addPickup(student.pickupNumber,student.name,source):addPickup(cleaned,"",source);}catch(e){return {success:false,message:"Student lookup error: "+e.message};}
+}
+async function submitScannerForm(inputId,messageId){const input=document.getElementById(inputId),m=document.getElementById(messageId);if(!input||!m)return;const r=await addPickupByNumber(input.value,"Manual");m.textContent=r.message;if(r.success){input.value="";input.focus();}}
+async function submitAdminAdd(inputId,messageId){const input=document.getElementById(inputId),m=document.getElementById(messageId);if(!input||!m)return;const r=await addPickupByNumber(input.value,"Admin");m.textContent=r.message;if(r.success){input.value="";input.focus();}}
