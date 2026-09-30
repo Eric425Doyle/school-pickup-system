@@ -41,3 +41,27 @@ button.small { padding:8px 12px; font-size:14px; }
 .empty { color:#777; font-style:italic; }
 .display-back-btn { background:#fff; color:var(--purple); padding:8px 14px; border-radius:6px; text-decoration:none; font-weight:700; border:2px solid var(--purple); display:inline-block; }
 @media (max-width:700px) { .container{padding:24px 12px;} nav{padding:0 6px;} nav a{font-size:15px;padding:16px 10px;} .card{padding:18px;} .diagnostic-grid{grid-template-columns:1fr;} .queue-item{font-size:18px;} }
+
+/* V3.1 scanner traffic-signal feedback */
+.scanner-feedback-shell { border-radius:16px; padding:14px; transition:background .15s ease, box-shadow .15s ease; }
+.scanner-feedback-shell.success { background:#22c55e; box-shadow:0 0 0 6px #15803d; }
+.scanner-feedback-shell.duplicate { background:#facc15; box-shadow:0 0 0 6px #a16207; }
+.scanner-feedback-shell.error { background:#ef4444; box-shadow:0 0 0 6px #b91c1c; }
+.scanner-feedback-shell.success .camera-shell { border-color:#fff; box-shadow:0 0 0 7px #16a34a; }
+.scanner-feedback-shell.duplicate .camera-shell { border-color:#fff; box-shadow:0 0 0 7px #eab308; }
+.scanner-feedback-shell.error .camera-shell { border-color:#fff; box-shadow:0 0 0 7px #dc2626; }
+.scan-overlay { display:none; position:absolute; inset:0; z-index:5; align-items:center; justify-content:center; flex-direction:column; text-align:center; line-height:1.05; color:#fff; background:rgba(22,163,74,.86); padding:20px; }
+.scan-overlay.show { display:flex; }
+.scan-overlay.duplicate { color:#111; background:rgba(250,204,21,.90); }
+.scan-overlay.error { background:rgba(220,38,38,.88); }
+.scan-overlay-icon { font-size:72px; font-weight:900; margin-bottom:4px; }
+.scan-overlay-title { font-size:54px; font-weight:900; letter-spacing:1px; }
+.scan-overlay-action { font-size:68px; font-weight:900; margin-top:12px; }
+.scan-overlay-detail { font-size:24px; font-weight:800; margin-top:16px; }
+.large-scanner-status { max-width:760px; margin:14px auto 0; border-radius:10px; padding:14px 18px; text-align:center; font-size:28px; font-weight:900; letter-spacing:.5px; line-height:1.1; }
+.large-scanner-status.ready-state { background:#ede9f2; color:var(--purple); border:2px solid var(--purple2); }
+.large-scanner-status.success { background:#166534; color:#fff; }
+.large-scanner-status.duplicate { background:#ca8a04; color:#111; }
+.large-scanner-status.error { background:#b91c1c; color:#fff; }
+.scanner-feedback-shell.success .scan-zone, .scanner-feedback-shell.duplicate .scan-zone, .scanner-feedback-shell.error .scan-zone { opacity:0; }
+@media (max-width:700px) { .scan-overlay-title{font-size:38px;} .scan-overlay-action{font-size:50px;} .scan-overlay-icon{font-size:56px;} .scan-overlay-detail{font-size:19px;} .large-scanner-status{font-size:22px;} }
