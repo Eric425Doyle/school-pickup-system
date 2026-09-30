@@ -7,4 +7,5 @@ const firebaseConfig = {
   appId: "1:936352246960:web:fdcd1b2fa91c78a2c09f75"
 };
 firebase.initializeApp(firebaseConfig);
-const db = firebase.firestore();
+const db = typeof firebase.firestore === "function" ? firebase.firestore() : null;
+const auth = firebase.auth();

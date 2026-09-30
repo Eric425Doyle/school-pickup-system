@@ -9,7 +9,8 @@ function getQueue(){ return liveQueue; }
 function getServedList(){ return liveServed; }
 function nowDisplay(){ return new Date().toLocaleTimeString(); }
 
-function startRealtimeSync(onChange){
+async function startRealtimeSync(onChange){
+  if (typeof authReady !== "undefined") { const user = await authReady; if (!user) return; }
   if(!queueUnsubscribe){
     queueUnsubscribe = queueRef().orderBy("order","asc").onSnapshot(snap=>{
       liveQueue = snap.docs.map(d=>({id:d.id,...d.data()}));

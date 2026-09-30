@@ -65,3 +65,13 @@ button.small { padding:8px 12px; font-size:14px; }
 .large-scanner-status.error { background:#b91c1c; color:#fff; }
 .scanner-feedback-shell.success .scan-zone, .scanner-feedback-shell.duplicate .scan-zone, .scanner-feedback-shell.error .scan-zone { opacity:0; }
 @media (max-width:700px) { .scan-overlay-title{font-size:38px;} .scan-overlay-action{font-size:50px;} .scan-overlay-icon{font-size:56px;} .scan-overlay-detail{font-size:19px;} .large-scanner-status{font-size:22px;} }
+
+/* V4.1 authentication */
+.auth-card { max-width: 520px; margin: 60px auto; }
+.auth-card input[type="email"], .auth-card input[type="password"] { width: 100%; max-width: none; box-sizing: border-box; }
+.auth-row { display:flex; gap:10px; align-items:center; flex-wrap:wrap; margin-top:12px; }
+.auth-status { margin-top:12px; font-weight:700; }
+.auth-error { color:#b91c1c; }
+.auth-userbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:10px 16px; background:#f5f0f8; border-bottom:1px solid #d8c9e3; font-size:14px; }
+.auth-userbar strong { color:#5f2a8a; }
+.auth-required-note { font-size:14px; color:#555; }
