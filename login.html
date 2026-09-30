@@ -1,11 +1,11 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Staff Sign In</title><link rel="stylesheet" href="style.css?v=4.3.4"></head><body>
+<!DOCTYPE html><html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1.0"><title>Staff Sign In</title><link rel="stylesheet" href="style.css?v=4.3.5"></head><body>
 <nav><a href="index.html">Home</a><a href="scanner.html">Scanner</a><a href="display.html">Display</a><a href="admin.html">Admin</a></nav>
 <div class="container"><div class="card auth-card"><h1>Staff Sign In</h1><p>Sign in with an authorized School Pickup staff account.</p>
 <label class="field-label" for="email">Email</label><input id="email" type="email" autocomplete="username" placeholder="staff@example.com">
 <label class="field-label" for="password">Password</label><input id="password" type="password" autocomplete="current-password" placeholder="Password">
 <div class="auth-row"><button class="primary" id="signInBtn">Sign In</button></div><div id="authMessage" class="auth-status" aria-live="polite"></div>
 <p class="auth-required-note">Development prototype: use only authorized test accounts and fake student data.</p></div></div>
-<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script><script src="firebase-config.js?v=4.3.4"></script><script>
+<script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-app-compat.js"></script><script src="https://www.gstatic.com/firebasejs/12.19.0/firebase-auth-compat.js"></script><script src="firebase-config.js?v=4.3.5"></script><script>
 const email=document.getElementById('email'),password=document.getElementById('password'),btn=document.getElementById('signInBtn'),message=document.getElementById('authMessage');
 function nextPage(){const p=new URLSearchParams(location.search).get('next');return p&&/^[A-Za-z0-9._?=#&%-]+$/.test(p)?p:'index.html';}
 firebase.auth().onAuthStateChanged(user=>{if(user)location.replace(nextPage());});

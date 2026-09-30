@@ -75,3 +75,5 @@ button.small { padding:8px 12px; font-size:14px; }
 .auth-userbar { display:flex; justify-content:space-between; align-items:center; gap:12px; flex-wrap:wrap; padding:10px 16px; background:#f5f0f8; border-bottom:1px solid #d8c9e3; font-size:14px; }
 .auth-userbar strong { color:#5f2a8a; }
 .auth-required-note { font-size:14px; color:#555; }
+
+.role-badge { margin-left: 8px; font-weight: 800; color: #6b2aa5; }

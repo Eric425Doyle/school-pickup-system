@@ -24,6 +24,20 @@ function allowedPagesForRole(role){
   return map[role] || [];
 }
 
+function updateRoleIndicator(role){
+  const bar = document.getElementById('authUserBar');
+  if(!bar) return;
+  let badge = document.getElementById('authRoleBadge');
+  if(!badge){
+    badge = document.createElement('span');
+    badge.id = 'authRoleBadge';
+    badge.className = 'role-badge';
+    const label = bar.firstElementChild;
+    if(label) label.appendChild(badge);
+  }
+  badge.textContent = ` | Role: ${String(role || 'unassigned').replace(/^./, c => c.toUpperCase())}`;
+}
+
 function applyRoleNavigation(role){
   const nav = document.querySelector('nav');
   const navItems = {
@@ -51,6 +65,8 @@ function applyRoleNavigation(role){
       nav.appendChild(a);
     });
   }
+
+  updateRoleIndicator(role);
 
   const allowed = allowedPagesForRole(role);
   document.querySelectorAll('.home-links a').forEach(a => {

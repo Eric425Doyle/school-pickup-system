@@ -1,0 +1,1 @@
+V4.3.5 navigation fix: index.html now loads Firestore before roles.js. Staff must see Home | Scanner | Display | Admin and Role: Staff. Admin sees all six authorized tabs.
