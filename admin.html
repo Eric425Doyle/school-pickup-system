@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Admin</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="scanner.html">Scanner</a>
+    <a href="display.html">Display</a>
+    <a class="active" href="admin.html">Admin</a>
+  </nav>
+
+  <div class="container">
+    <div class="card">
+      <h1>Admin</h1>
+      <p>Use this page to adjust queue order, move a car to the top, add missed tags, and mark cars as served.</p>
+
+      <input id="adminAddInput" type="text" inputmode="numeric" enterkeyhint="go" autocomplete="off" placeholder="Enter missed tag number" />
+      <br />
+      <button class="primary" onclick="submitAdminAdd('adminAddInput', 'adminMessage')">Add Tag</button>
+
+      <div id="adminMessage" class="message"></div>
+
+      <div class="admin-actions">
+        <button class="danger" onclick="handleClearAll()">Clear Active Queue</button>
+        <button class="danger" onclick="handleClearServed()">Clear Served Log</button>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2>Active Queue</h2>
+      <div id="adminQueue" class="queue-list"></div>
+    </div>
+
+    <div class="card">
+      <h2>Recently Served</h2>
+      <div id="servedQueue" class="queue-list"></div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+  <script>
+    function handleClearAll() {
+      clearQueue();
+      renderAllLists();
+    }
+
+    function handleClearServed() {
+      clearServedList();
+      renderAllLists();
+    }
+
+    const adminAddInput = document.getElementById("adminAddInput");
+
+    adminAddInput.addEventListener("keydown", (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        submitAdminAdd("adminAddInput", "adminMessage");
+      }
+    });
+
+    renderAllLists();
+    window.addEventListener("storage", () => renderAllLists());
+  </script>
+</body>
+</html>
