@@ -1,0 +1,13 @@
+V4.3.3 ROLE-AWARE UI UPDATE
+
+No Firestore rule changes are required from V4.3.2.
+
+Expected navigation after sign-in:
+- admin: Home | Scanner | Display | Admin | Students & QR | History
+- staff: Home | Scanner | Display | Admin
+- scanner: Scanner only (Home redirects to Scanner)
+- display: Display only (Home redirects to Display)
+
+Test QR Card is intentionally removed from normal navigation but test-card.html remains in the package for development use.
+
+Upload ALL files in this folder to the GitHub repository root and commit to main.
