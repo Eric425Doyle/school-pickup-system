@@ -25,19 +25,39 @@ function allowedPagesForRole(role){
 }
 
 function applyRoleNavigation(role){
-  const allowed = allowedPagesForRole(role);
-  document.querySelectorAll('nav a').forEach(a => {
-    const href = (a.getAttribute('href') || '').split('?')[0].split('#')[0];
-    if(!allowed.includes(href)) a.remove();
-  });
+  const nav = document.querySelector('nav');
+  const navItems = {
+    admin: [
+      ['index.html','Home'], ['scanner.html','Scanner'], ['display.html','Display'],
+      ['admin.html','Admin'], ['students.html','Students & QR'], ['history.html','History']
+    ],
+    staff: [
+      ['index.html','Home'], ['scanner.html','Scanner'], ['display.html','Display'], ['admin.html','Admin']
+    ],
+    scanner: [['scanner.html','Scanner']],
+    display: [['display.html','Display']]
+  };
 
-  // Home-page action buttons use the same role filter.
+  // Rebuild navigation from the authenticated role instead of merely hiding links.
+  // This prevents privileged links from remaining visible if the original page markup changes.
+  if(nav){
+    const currentPage = location.pathname.split('/').pop() || 'index.html';
+    nav.innerHTML = '';
+    (navItems[role] || []).forEach(([href,label]) => {
+      const a = document.createElement('a');
+      a.href = href;
+      a.textContent = label;
+      if(currentPage === href) a.className = 'active';
+      nav.appendChild(a);
+    });
+  }
+
+  const allowed = allowedPagesForRole(role);
   document.querySelectorAll('.home-links a').forEach(a => {
     const href = (a.getAttribute('href') || '').split('?')[0].split('#')[0];
     if(!allowed.includes(href)) a.remove();
   });
 
-  // A dedicated display device should not be offered an Admin back button.
   if(role === 'display'){
     document.querySelectorAll('a.display-back-btn').forEach(a => a.remove());
   }

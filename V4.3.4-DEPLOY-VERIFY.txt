@@ -1,0 +1,1 @@
+V4.3.4 role-aware navigation patch. Staff nav must show only Home, Scanner, Display, Admin. Scanner role shows Scanner only. Display role shows Display only. Admin shows Home, Scanner, Display, Admin, Students & QR, History.

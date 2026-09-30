@@ -1,4 +1,4 @@
-V4.3.3 ROLE-AWARE UI UPDATE
+V4.3.4 ROLE-AWARE UI UPDATE
 
 No Firestore rule changes are required from V4.3.2.
 
