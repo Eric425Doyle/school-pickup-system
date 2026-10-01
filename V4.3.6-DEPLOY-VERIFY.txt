@@ -1,0 +1,8 @@
+V4.3.6 scanner timing/rearm update
+- Green CARD ACCEPTED: 3 seconds
+- Amber ALREADY SCANNED: 2.5 seconds
+- Red errors/unrecognized: 0.9 seconds
+- Same recognized QR must leave camera view for about 0.6 seconds before it can trigger again
+- No QR detected remains READY; it does not show red
+- Role/security behavior unchanged from V4.3.5
+Verify live Home heading shows V4.3.6 after GitHub Pages deploy.
