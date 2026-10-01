@@ -1,0 +1,7 @@
+V4.3.7 bilingual scanner feedback
+- Green: 3 seconds, English + Spanish
+- Amber: 2.5 seconds, English + Spanish
+- Red: 0.9 seconds, English + Spanish
+- Ready state bilingual
+- Same-card leave/rearm behavior preserved from V4.3.6
+Verify live Home heading shows V4.3.7 after GitHub Pages deploy.
